@@ -1,0 +1,29 @@
+<html>
+<head>
+<meta http-equiv="Content-Type"	content="text/html;charset=gb2312">
+<script type="text/javascript">
+function javacalljs(){
+	 document.getElementById("content").innerHTML +=   
+         "<br\>java调用了js函数";
+}
+
+function javacalljswithargs(arg){
+	 document.getElementById("content").innerHTML +=   
+         ("<br\>"+arg);
+}
+
+function start(arg){
+	 document.getElementById("content").innerHTML +=
+         ("<br\>"+arg);
+         HostApp.startFunction('1232131231312312')
+}
+
+</script>
+</head>
+<body>
+<a href="http://www.w3school.com.cn" onClick="window.HostApp.startFunction()">点击调用java代码</a><br/>
+<a onClick="start('1232131231312312')" >点击调用java代码并传递参数</a>
+<br/>
+<div id="content">内容显示</div>
+</body>
+</html>

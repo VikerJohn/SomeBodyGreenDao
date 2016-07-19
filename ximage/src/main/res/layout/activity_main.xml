@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zwei.ximage.MainActivity">
+
+
+    <cn.kejin.ximageview.XImageView
+        android:id="@+id/xImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:doubleTapScaleType="fitView"
+        app:initFitView="true" />
+    <!-- initFitView 属性是当图片小于 view的尺寸时，是否需要在初始化时使用view的尺寸 -->
+
+    <ImageView
+        android:id="@+id/ibtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/ic_launcher" />
+
+
+    <Button
+        android:id="@+id/btn_show"
+        android:layout_below="@id/ibtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ripple_bg"
+        android:text="出来" />
+
+
+</RelativeLayout>

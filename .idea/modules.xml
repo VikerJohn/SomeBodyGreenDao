@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/SomeBodyGreenDao.iml" filepath="$PROJECT_DIR$/SomeBodyGreenDao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/animationbuttion/animationbuttion.iml" filepath="$PROJECT_DIR$/animationbuttion/animationbuttion.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cardviewdemo/cardviewdemo.iml" filepath="$PROJECT_DIR$/cardviewdemo/cardviewdemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/emojiapp/emojiapp.iml" filepath="$PROJECT_DIR$/emojiapp/emojiapp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jswebview/jswebview.iml" filepath="$PROJECT_DIR$/jswebview/jswebview.iml" />
+      <module fileurl="file://$PROJECT_DIR$/materialdesigndemo/materialdesigndemo.iml" filepath="$PROJECT_DIR$/materialdesigndemo/materialdesigndemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mydaogenerator/mydaogenerator.iml" filepath="$PROJECT_DIR$/mydaogenerator/mydaogenerator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mymvpdemo/mymvpdemo.iml" filepath="$PROJECT_DIR$/mymvpdemo/mymvpdemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/myrxdemo/myrxdemo.iml" filepath="$PROJECT_DIR$/myrxdemo/myrxdemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/scrollmodule/scrollmodule.iml" filepath="$PROJECT_DIR$/scrollmodule/scrollmodule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/settingview/settingview.iml" filepath="$PROJECT_DIR$/settingview/settingview.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ximage/ximage.iml" filepath="$PROJECT_DIR$/ximage/ximage.iml" />
+    </modules>
+  </component>
+</project>

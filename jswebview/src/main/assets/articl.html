@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style type="text/css">
+        img {
+        width: 100% !important;
+        height: auto !important;
+        }
+    </style>
+    <script type="text/javascript" src=" http://112.74.18.65:8080/o2o-questions/thirdpart/jquery/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src=" http://112.74.18.65:8080/o2o-questions/thirdpart/jquery/touch-0.2.14.js"></script>
+    <script type="text/javascript">
+$(function(){
+
+    //点击Img
+    function  clickImg(){
+        $('img').on("click",function(){
+            var event = this;
+            var title = event.src;
+            var imgs = document.getElementsByTagName("img");
+            var index = 0;
+            var string = "{\"imgs\":[";
+            for(i = 0;i < imgs.length;i++)
+            {
+                if(i == imgs.length - 1)
+                    string = string + "\"" + imgs[i].src + "\""
+                else
+                    string = string  + "\"" + imgs[i].src + "\"" + ",";
+                if( imgs[i].src == title)
+                    index = i;
+            }
+            string += "],";
+            string = string + "\"currentCount\":" + index;
+            string += "}";
+            HostApp.toast(index,string);
+        });
+    }
+
+    //长按img
+    function holdImg(){
+        touch.on('img', 'hold', function(ev){
+            HostApp&&HostApp.longtoast(this.src);
+        });
+
+    }
+
+    function initEvent(){
+        holdImg();
+        clickImg();
+    }
+    initEvent();
+})
+</script>
+
+    </head>
+
+<body><p style="margin: 26px 0px; padding: 0px; width: auto; overflow: hidden; list-style: none; color: rgb(37, 37, 37); font-family: &#39;Microsoft Yahei&#39;; font-size: 16px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 28px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">今年我正好是 30 岁。程序员的技术水平，到 30 就该定型了。过了 30，体力也逐渐下降，不可能没日没夜地加班。</div><p style="margin: 26px 0px; padding: 0px; width: auto; overflow: hidden; list-style: none; color: rgb(37, 37, 37); font-family: &#39;Microsoft Yahei&#39;; font-size: 16px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 28px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><img alt="17598502_092833_1_lit.jpg" src="http://xuebangsoft-questions.oss-cn-shenzhen.aliyuncs.com/140dc9d9-8e95-4791-8268-2bcbbb4a7ca6.jpg" title=".jpg"/></div><div></div></body>
+</html>
