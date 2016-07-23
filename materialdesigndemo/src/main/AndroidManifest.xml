@@ -7,10 +7,13 @@
     <application
         android:name=".base.MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <!-- android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen"> -->
+
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/app_name"
@@ -26,7 +29,13 @@
         <activity
             android:name=".activity.ScrollingActivity"
             android:label="@string/title_activity_scrolling"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.DraScrollActivity"
+            android:label="@string/title_activity_dra_scroll"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.NewActionBarActivity"
+            android:theme="@style/AppTheme.NoActionBar" ></activity>
     </application>
 
 </manifest>

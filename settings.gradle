@@ -1,4 +1,4 @@
 include ':app', ':mydaogenerator', ':jswebview', ':ximage', ':scrollmodule',
-        ':emojiapp', ':myrxdemo', ':mymvpdemo','settingview',
+        ':emojiapp', ':myrxdemo', ':mymvpdemo', 'settingview',
         ':animationbuttion', ':materialdesigndemo', ':cardviewdemo'
 

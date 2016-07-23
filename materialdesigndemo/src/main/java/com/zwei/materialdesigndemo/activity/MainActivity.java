@@ -1,5 +1,6 @@
 package com.zwei.materialdesigndemo.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.AsyncTask;
@@ -22,7 +23,9 @@ import android.view.View;
 
 import com.zwei.materialdesigndemo.R;
 import com.zwei.materialdesigndemo.adapter.SectionsPagerAdapter;
+import com.zwei.materialdesigndemo.base.Contants;
 import com.zwei.materialdesigndemo.utils.ABViewUtil;
+import com.zwei.materialdesigndemo.utils.AppCompat;
 import com.zwei.materialdesigndemo.widget.RevealView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -35,6 +38,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ViewPager mViewPager;
     private RevealView mAlbumRevealView;
     private boolean mIsAlbumRevealOpen =false;
+    private DrawerLayout drawer;
+
+    public DrawerLayout getDrawer() {
+        return drawer;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +52,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
@@ -73,17 +79,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mAlbumRevealView.setOnTouchListener(mEmptyTouch);
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar,
-
                 R.string.app_name,
                 R.string.hello_blank_fragment);
 
 
-        toggle. setDrawerIndicatorEnabled(false);
+//        toggle. setDrawerIndicatorEnabled(false);
 //        toggle.setHomeAsUpIndicator(R.mipmap.ic_launcher);
-        toolbar.setNavigationIcon(R.mipmap.ic_launcher);
+//        toolbar.setNavigationIcon(R.mipmap.ic_launcher);
 
         drawer.addDrawerListener(toggle);
         toggle.syncState();
@@ -165,9 +170,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+//        drawer.openDrawer(GravityCompat.END);
+//        drawer.openDrawer(GravityCompat.START);
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+
+            startActivity(new Intent(this,NewActionBarActivity.class));
+
             return true;
         }
 
@@ -183,7 +193,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         drawer.closeDrawer(GravityCompat.START);
         return true;
 

@@ -2,6 +2,7 @@ package com.zwei.materialdesigndemo.fragment;
 
 
 
+import android.content.Intent;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.GridLayoutManager;
 
@@ -11,6 +12,7 @@ import android.widget.Toast;
 
 import com.zwei.materialdesigndemo.R;
 
+import com.zwei.materialdesigndemo.activity.DraScrollActivity;
 import com.zwei.materialdesigndemo.adapter.BaseRVAdpater;
 import com.zwei.materialdesigndemo.adapter.PhotoGrideAdapter;
 import com.zwei.materialdesigndemo.bean.Article;
@@ -72,7 +74,7 @@ public class PhotoGrideFragment extends BaseFragment {
     {
         @Override
         public void onItemClick(View view, int position) {
-//            ActivityOptionsCompat.makeSceneTransitionAnimation()
+            getActivity().startActivity(new Intent(getContext(), DraScrollActivity.class));
         }
     };
 

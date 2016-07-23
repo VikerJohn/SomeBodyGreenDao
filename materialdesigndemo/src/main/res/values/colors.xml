@@ -8,4 +8,10 @@
 
     <color name="main_blue">#4bacee</color>
     <color name="main_green">#bbcc33</color>
+
+    <color name="transparent">#e0000000</color>
+    <color name="tran">#50333333</color>
+
+
+
 </resources>

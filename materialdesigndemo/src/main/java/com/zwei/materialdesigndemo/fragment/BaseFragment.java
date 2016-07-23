@@ -2,6 +2,8 @@ package com.zwei.materialdesigndemo.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,8 +40,6 @@ public abstract class BaseFragment extends Fragment {
      * Returns a new instance of this fragment for the given section
      * number.
      */
-
-
 
     protected SoftReference<View> rootview;
     @Override
