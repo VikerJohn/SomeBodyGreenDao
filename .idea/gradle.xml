@@ -5,23 +5,6 @@
       <GradleProjectSettings>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/animationbuttion" />
-            <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/cardviewdemo" />
-            <option value="$PROJECT_DIR$/emojiapp" />
-            <option value="$PROJECT_DIR$/jswebview" />
-            <option value="$PROJECT_DIR$/materialdesigndemo" />
-            <option value="$PROJECT_DIR$/mydaogenerator" />
-            <option value="$PROJECT_DIR$/mymvpdemo" />
-            <option value="$PROJECT_DIR$/myrxdemo" />
-            <option value="$PROJECT_DIR$/scrollmodule" />
-            <option value="$PROJECT_DIR$/settingview" />
-            <option value="$PROJECT_DIR$/ximage" />
-          </set>
-        </option>
         <option name="resolveModulePerSourceSet" value="false" />
       </GradleProjectSettings>
     </option>
