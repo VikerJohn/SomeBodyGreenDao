@@ -1,5 +1,7 @@
 package com.zwei.materialdesigndemo.utils;
 
+import com.zwei.materialdesigndemo.base.Contants;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -242,7 +244,8 @@ public class FileUtil{
                 byte[] buffer = new byte[1444];
                 while((byteread = inStream.read(buffer)) != -1){
                     bytesum += byteread; //字节数 文件大小
-                    System.out.println(bytesum);
+//                    System.out.println(bytesum);
+                    Contants.log(false,"文件大小（单位字节）:"+bytesum);
                     fs.write(buffer, 0, byteread);
                 }
                 inStream.close();

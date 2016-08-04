@@ -27,6 +27,14 @@ public class Contants {
         }
     }
 
+    public static void log(boolean b ,String msg) {
+        if (b) {
+            Log.e("materialdesigndemo", "=========================================");
+            Log.e("materialdesigndemo", msg + " ");
+            Log.e("materialdesigndemo", "=========================================");
+        }
+    }
+
     public static void logW(String msg) {
         if (DEBUG) {
             Log.w("logzwei", "=========================================");

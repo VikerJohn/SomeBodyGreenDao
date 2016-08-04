@@ -14,18 +14,40 @@ public class FileChangeName {
     public static void main(String[] args) {
         //    在此目录中找文件
         String baseDIR = "D:\\Documents\\Desktop\\掌上星火\\pic";
+
         //    找扩展名为txt的文件
         String fileName = "you.png";
         String newFileName = "you_checked.png";
+     /*   startReName(baseDIR, "Close.png", "close.png");
+        startReName(baseDIR, "jinji.png", "jinji_normal.png");
+        startReName(baseDIR, "jinji1.png", "jinji_checked.png");
 
-        showFilePath(baseDIR, fileName);
+       startReName(baseDIR, "yiban.png", "yiban_normal.png");
+        startReName(baseDIR, "yiban1.png", "yiban_checked.png");
 
-        replaceFileName(baseDIR,fileName,newFileName);
+
+       startReName(baseDIR, "zhongyaojinji.png", "zhongyaojinji_normal.png");
+        startReName(baseDIR, "zhongyaojinji1.png", "zhongyaojinji_checked.png");
+*/
+
+
+       startReName(baseDIR, "icon.png", "icon_normal.png");
+        startReName(baseDIR, "icon1.png", "icon_pressed.png");
+
+
+
+
+
 
     }
 
+    private static void startReName(String baseDIR, String fileName, String newFileName) {
+        showFilePath(baseDIR, fileName);
+        replaceFileName(baseDIR,fileName,newFileName);
+    }
+
     /**
-     * 递归修改文件
+     * 递归复制到相同文件夹中
      *
      * @param baseDirName    查找的文件夹路径
      * @param targetFileName 需要查找的文件名

@@ -8,10 +8,39 @@
     tools:context="com.zwei.scrollmodule.ScrollingActivity"
     tools:showIn="@layout/activity_scrolling">
 
-    <TextView
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:background="@color/colorAccent"
+        android:orientation="vertical">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12312321" />
+
+    <LinearLayout
+        android:id="@+id/l222"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="#f5f5"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12312321" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12312321" />
+
+    </LinearLayout>
+</LinearLayout>
+    <!--<TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
-        android:text="@string/large_text" />
+        android:text="@string/large_text" />-->
 
 </android.support.v4.widget.NestedScrollView>

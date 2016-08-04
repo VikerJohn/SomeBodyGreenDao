@@ -1,4 +1,4 @@
-include ':app', ':mydaogenerator', ':jswebview', ':ximage', ':scrollmodule',
+include ':app', ':mydaogenerator', ':jswebview', ':ximage', ':scrollmodule', ':dpicalculator',
         ':emojiapp', ':myrxdemo', ':mymvpdemo', 'settingview',
         ':animationbuttion', ':materialdesigndemo', ':cardviewdemo'
 
