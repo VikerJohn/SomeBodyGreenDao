@@ -1,14 +1,12 @@
 package com.zwei.materialdesigndemo.fragment;
 
 
-
 import android.content.Intent;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.GridLayoutManager;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
-import android.widget.Toast;
 
 import com.zwei.materialdesigndemo.R;
 
@@ -17,6 +15,7 @@ import com.zwei.materialdesigndemo.adapter.BaseRVAdpater;
 import com.zwei.materialdesigndemo.adapter.PhotoGrideAdapter;
 import com.zwei.materialdesigndemo.bean.Article;
 import com.zwei.materialdesigndemo.service.ApiService;
+import com.zwei.materialdesigndemo.utils.SPfUtil;
 import com.zwei.materialdesigndemo.widget.recyclerview.adapter.AlphaAnimatorAdapter;
 
 import java.util.List;
@@ -44,7 +43,7 @@ public class PhotoGrideFragment extends BaseFragment {
     @Override
     protected void initView() {
 
-        layoutManager = new GridLayoutManager(getContext(),3);
+        layoutManager = new GridLayoutManager(getContext(), 3);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setHasFixedSize(false);
 
@@ -53,25 +52,40 @@ public class PhotoGrideFragment extends BaseFragment {
         adapter.isShowFooter(false);
 
         //添加Item动画
-        AlphaAnimatorAdapter animatorAdapter = new AlphaAnimatorAdapter(adapter,mRecyclerView);
+        AlphaAnimatorAdapter animatorAdapter = new AlphaAnimatorAdapter(adapter, mRecyclerView);
         mRecyclerView.setAdapter(adapter);
 
         loadData();
     }
 
     private void loadData() {
+        String token = SPfUtil.getPrefString(getContext(), "token", null);
+        if (!TextUtils.isEmpty(token)) {
+            getArts(token);
+        } else {
+            ApiService.getToken(new ApiService.CallbackData<String>() {
+                @Override
+                public void done(String data) {
+                    SPfUtil.setPrefString(getContext(), "token", data);
+                    getArts(data);
+                }
+            });
 
-        ApiService.getArts(new ApiService.CallbackData<List<Article.DataBean.ContentBean>>() {
+        }
+
+    }
+
+    private void getArts(String token) {
+
+        ApiService.getArts(token,new ApiService.CallbackData<List<Article.DataBean.ContentBean>>() {
             @Override
             public void done(List<Article.DataBean.ContentBean> data) {
                 adapter.setDate(data);
             }
         });
-
     }
 
-    BaseRVAdpater.OnItemClickListener listener = new BaseRVAdpater.OnItemClickListener()
-    {
+    BaseRVAdpater.OnItemClickListener listener = new BaseRVAdpater.OnItemClickListener() {
         @Override
         public void onItemClick(View view, int position) {
             getActivity().startActivity(new Intent(getContext(), DraScrollActivity.class));
