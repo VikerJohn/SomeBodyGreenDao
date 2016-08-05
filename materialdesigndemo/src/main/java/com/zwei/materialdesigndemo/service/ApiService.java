@@ -5,6 +5,7 @@ import com.zhy.http.okhttp.callback.Callback;
 import com.zhy.http.okhttp.callback.StringCallback;
 import com.zwei.materialdesigndemo.base.Contants;
 import com.zwei.materialdesigndemo.bean.Article;
+import com.zwei.materialdesigndemo.bean.Token;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -25,21 +26,48 @@ import rx.schedulers.Schedulers;
 public class ApiService {
 
     public static void getArts(final CallbackData<List<Article.DataBean.ContentBean>> callback) {
-        Map<String, String> params = new HashMap<>();
-        params.put("token", "9433eeb7-8fe0-4bcd-b4cb-0589c18555fd ");
-        params.put("page", 0 + "");
-        params.put("pageSize", "" + 5);//pageSize 加载数量
-        params.put("flag", "");
-        params.put("createTime", null);
 
-        final Api2Service apiService = ApiSupport.getApi2Service();
+//        Api2Service apiService = ;
+        getToken(new CallbackData<String>() {
+            @Override
+            public void done(String data) {
 
-        Observable<Article> observable = apiService.getArtList("9433eeb7-8fe0-4bcd-b4cb-0589c18555fd",10,0,null,null);
+                ApiSupport.getApi2Service().getArtList(data, 10, 0, null, null).subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Subscriber<Article>() {
+                            @Override
+                            public void onCompleted() {
+                                Contants.log("onCompleted");
+                            }
 
-        observable
-                .subscribeOn(Schedulers.io())
+                            @Override
+                            public void onError(Throwable e) {
+                                Contants.log("onError:" + e.getMessage());
+                            }
+
+
+                            @Override
+                            public void onNext(Article article) {
+                                Contants.log("称谷歌::" + article.getCode());
+                                if (article.getCode() == 2000) {
+                                    callback.done(article.getData().getContent());
+
+                                }
+                            }
+                        });
+            }
+        });
+
+
+
+
+    }
+
+    public static void getToken(final CallbackData<String> callback) {
+
+        ApiSupport.getApi2Service().getToken("123", "123").subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<Article>() {
+                .subscribe(new Subscriber<Token>() {
                     @Override
                     public void onCompleted() {
                         Contants.log("onCompleted");
@@ -52,17 +80,19 @@ public class ApiService {
 
 
                     @Override
-                    public void onNext(Article article) {
-                        Contants.log("称谷歌::"+article.getCode());
-                        if (article.getCode()==2000){
-                            callback.done(  article.getData().getContent());
-
+                    public void onNext(Token data) {
+                        if (data.getCode() == 2000) {
+                            callback.done(data.getData());
+                        }else {
+                            callback.done(null);
+                            Contants.log("错误码:" + data.getCode()+":    :"+data.getMsg());
                         }
                     }
                 });
     }
 
-    public interface CallbackData<T>{
+
+    public interface CallbackData<T> {
         void done(T data);
     }
 

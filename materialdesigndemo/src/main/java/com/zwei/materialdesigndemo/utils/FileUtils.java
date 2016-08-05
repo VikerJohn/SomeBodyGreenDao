@@ -15,6 +15,8 @@ import java.util.List;
 
 import android.text.TextUtils;
 
+import org.apache.commons.io.IOUtils;
+
 /**
  * File Utils
  * <ul>
@@ -186,7 +188,7 @@ public class FileUtils {
     /**
      * write file
      * 
-     * @param file the file to be opened for writing.
+     * @param filePath the file to be opened for writing.
      * @param stream the input stream
      * @param append if <code>true</code>, then bytes will be written to the end of the file rather than the beginning
      * @return return true

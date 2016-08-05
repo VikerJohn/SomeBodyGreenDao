@@ -1,12 +1,41 @@
 package com.zwei.materialdesigndemo.utils;
 
+import org.apache.commons.io.FileExistsException;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.LineIterator;
+import org.apache.commons.io.filefilter.DirectoryFileFilter;
+
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.zip.CRC32;
+import java.util.zip.CheckedInputStream;
+import java.util.zip.Checksum;
+
+import org.apache.commons.*;
+import org.apache.commons.io.filefilter.FalseFileFilter;
+import org.apache.commons.io.filefilter.IOFileFilter;
+import org.apache.commons.io.filefilter.SuffixFileFilter;
+import org.apache.commons.io.filefilter.TrueFileFilter;
+import org.apache.commons.io.output.NullOutputStream;
+
+import static org.apache.commons.io.FileUtils.EMPTY_FILE_ARRAY;
 
 /**
  * Created by Administrator on 2016/7/29.
@@ -140,6 +169,7 @@ public class FIlePowerUtil {
 
     /**
      * 字节转换成直观带单位的值（包括单位GB，MB，KB或字节）byteCountToDisplaySize(long size)
+     *
      * @param size
      * @return
      */
@@ -172,6 +202,7 @@ public class FIlePowerUtil {
 
     /**
      * 创建一个空文件，若文件应经存在则只更改文件的最近修改时间：touch(File file)
+     *
      * @param file
      * @throws IOException
      */
@@ -196,28 +227,27 @@ public class FIlePowerUtil {
     }
 
 
-    把相应的文件集合转换成文件数组convertFileCollectionToFileArray(Collection<File> files)
-
-
+    /**
+     * 把相应的文件集合转换成文件数组convertFileCollectionToFileArray(Collection<File> files)
+     *
+     * @param files
+     * @return
+     */
     public static File[] convertFileCollectionToFileArray(Collection<File> files) {
 
-        return files.toArray(newFile[files.size()]);
+        return files.toArray(new File[files.size()]);
 
     }
 
 
-    根据一个过滤规则获取一个目录下的文件innerListFiles(Collection<File> files, File directory, IOFileFilterfilter)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
-    private static void innerListFiles(Collection<File> files, File directory,
-
-                                       IOFileFilter filter) {
-
+    /**
+     * 根据一个过滤规则获取一个目录下的文件innerListFiles(Collection<File> files, File directory, IOFileFilterfilter)
+     *
+     * @param files
+     * @param directory
+     * @param filter
+     */
+    private static void innerListFiles(Collection<File> files, File directory, FileFilter filter) {
         File[] found = directory.listFiles((FileFilter) filter);
 
         if (found != null) {
@@ -241,30 +271,26 @@ public class FIlePowerUtil {
     }
 
 
-    根据一个IOFileFilter过滤规则获取一个目录下的文件集合listFiles(File directory, IOFileFilterfileFilter, IOFileFilter dirFilter)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     * 根据一个IOFileFilter过滤规则获取一个目录下的文件集合listFiles(File directory, IOFileFilterfileFilter, IOFileFilter dirFilter)
+     *
+     * @param directory
+     * @param fileFilter
+     * @param dirFilter
+     * @return
+     */
     public static Collection<File> listFiles(
 
-            File directory, IOFileFilterfileFilter, IOFileFilter dirFilter) {
+            File directory, IOFileFilter fileFilter, IOFileFilter dirFilter) {
 
         if (!directory.isDirectory()) {
 
-            throw newIllegalArgumentException(
+            throw new IllegalArgumentException(
 
                     "Parameter'directory' is not a directory");
-
         }
-
         if (fileFilter == null) {
-
-            throw newNullPointerException("Parameter 'fileFilter' is null");
-
+            throw new NullPointerException("Parameter 'fileFilter' is null");
         }
 
 
@@ -294,7 +320,7 @@ public class FIlePowerUtil {
 
         //Find files
 
-        Collection<File> files = newjava.util.LinkedList < File > ();
+        Collection<File> files = new java.util.LinkedList < File > ();
 
         innerListFiles(files, directory,
 
@@ -305,29 +331,24 @@ public class FIlePowerUtil {
     }
 
 
-    根据一个IOFileFilter过滤规则获取一个目录下的文件集合的Iterator迭代器iterateFiles(File directory, IOFileFilterfileFilter, IOFileFilter dirFilter)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
-    public static Iterator<File> iterateFiles(File directory, IOFileFilterfileFilter, IOFileFilter dirFilter) {
+    /**
+     * 根据一个IOFileFilter过滤规则获取一个目录下的文件集合的Iterator迭代器iterateFiles(File directory, IOFileFilterfileFilter, IOFileFilter dirFilter)
+     * @param directory
+     * @param fileFilter
+     * @param dirFilter
+     * @return
+     */
+    public static Iterator<File> iterateFiles(File directory, IOFileFilter fileFilter, IOFileFilter dirFilter) {
 
         return listFiles(directory, fileFilter, dirFilter).iterator();
 
     }
 
-
-    把指定的字符串数组变成后缀名格式字符串数组toSuffixes(String[] extensions)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     *  把指定的字符串数组变成后缀名格式字符串数组toSuffixes(String[] extensions)
+     * @param extensions
+     * @return
+     */
     private static String[] toSuffixes(String[] extensions) {
 
         String[] suffixes = new String[extensions.length];
@@ -343,15 +364,13 @@ public class FIlePowerUtil {
     }
 
 
-    查找一个目录下面符合对应扩展名的文件的集合listFiles(File directory, String[] extensions, boolean recursive)
-
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     *  查找一个目录下面符合对应扩展名的文件的集合listFiles(File directory, String[] extensions, boolean recursive)
+     * @param directory
+     * @param extensions
+     * @param recursive
+     * @return
+     */
     public static Collection<File> listFiles(File directory, String[] extensions, boolean recursive) {
 
         IOFileFilter filter;
@@ -374,14 +393,14 @@ public class FIlePowerUtil {
 
     }
 
-    查找一个目录下面符合对应扩展名的文件的集合的迭代器Iterator<File> iterateFiles(File directory, String[] extensions, boolean recursive)
-            [java
 
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     * 查找一个目录下面符合对应扩展名的文件的集合的迭代器Iterator<File> iterateFiles(File directory, String[] extensions, boolean recursive)
+     * @param directory
+     * @param extensions
+     * @param recursive
+     * @return
+     */
     public static Iterator<File> iterateFiles(File directory, String[] extensions, boolean recursive) {
 
         return listFiles(directory, extensions, recursive).iterator();
@@ -389,14 +408,13 @@ public class FIlePowerUtil {
     }
 
 
-    判断两个文件是否相等contentEquals(Filefile1, File file2)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     * 判断两个文件是否相等contentEquals(Filefile1, File file2)
+     * @param file1
+     * @param file2
+     * @return
+     * @throws IOException
+     */
     public static boolean contentEquals(File file1, File file2) throws IOException {
 
         boolean file1Exists = file1.exists();
@@ -450,11 +468,11 @@ public class FIlePowerUtil {
 
         try {
 
-            input1 = newFileInputStream(file1);
+            input1 = new FileInputStream(file1);
 
-            input2 = newFileInputStream(file2);
+            input2 = new FileInputStream(file2);
 
-            returnIOUtils.contentEquals(input1, input2);
+            return IOUtils.contentEquals(input1, input2);
 
 
         } finally {
@@ -468,15 +486,12 @@ public class FIlePowerUtil {
     }
 
 
-    根据一个Url来创建一个文件toFile(URL url)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
-    public static File toFile(URL url) {
+    /**
+     * 根据一个Url来创建一个文件toFile(URL url)
+     * @param url
+     * @return
+     */
+/*    public static File toFile(URL url) {
 
         if (url == null || !"file".equalsIgnoreCase(url.getProtocol())) {
 
@@ -492,20 +507,15 @@ public class FIlePowerUtil {
 
         }
 
-    }
+    }*/
 
 
-    对一个Url字符串进行将指定的URL按照RFC 3986
-
-    进行转换decodeUrl(Stringurl)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
-    static String decodeUrl(String url) {
+    /**
+     * 对一个Url字符串进行将指定的URL按照RFC 3986 进行转换decodeUrl(Stringurl)
+     * @param url
+     * @return
+     */
+    /*static String decodeUrl(String url) {
 
         String decoded = url;
 
@@ -513,7 +523,7 @@ public class FIlePowerUtil {
 
             int n = url.length();
 
-            StringBuffer buffer = newStringBuffer();
+            StringBuffer buffer = new StringBuffer();
 
             ByteBuffer bytes = ByteBuffer.allocate(n);
 
@@ -567,18 +577,15 @@ public class FIlePowerUtil {
 
         return decoded;
 
-    }
+    }*/
 
 
-    将一个URL数组转化成一个文件数组toFiles(URL[] urls)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
-    public static File[] toFiles(URL[] urls) {
+    /**
+     * 将一个URL数组转化成一个文件数组toFiles(URL[] urls)
+     * @param urls
+     * @return
+     */
+  /*  public static File[] toFiles(URL[] urls) {
 
         if (urls == null || urls.length == 0) {
 
@@ -586,7 +593,7 @@ public class FIlePowerUtil {
 
         }
 
-        File[] files = newFile[urls.length];
+        File[] files = new File[urls.length];
 
         for (int i = 0; i < urls.length; i++) {
 
@@ -596,7 +603,7 @@ public class FIlePowerUtil {
 
                 if (url.getProtocol().equals("file") == false) {
 
-                    throw newIllegalArgumentException(
+                    throw new IllegalArgumentException(
 
                             "URL couldnot be converted to a File: " + url);
 
@@ -610,18 +617,15 @@ public class FIlePowerUtil {
 
         return files;
 
-    }
+    }*/
 
 
-    将一个文件数组转化成一个URL数组toURLs(File[] files)
-
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     *     将一个文件数组转化成一个URL数组toURLs(File[] files)
+     * @param files
+     * @return
+     * @throws IOException
+     */
     public static URL[] toURLs(File[] files) throws IOException {
 
         URL[] urls = new URL[files.length];
@@ -639,14 +643,12 @@ public class FIlePowerUtil {
     }
 
 
-    拷贝一个文件到指定的目录文件copyFileToDirectory(File srcFile, File destDir)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     * 拷贝一个文件到指定的目录文件copyFileToDirectory(File srcFile, File destDir)
+     * @param srcFile
+     * @param destDir
+     * @throws IOException
+     */
     public static void copyFileToDirectory(File srcFile, File destDir) throws IOException {
 
         copyFileToDirectory(srcFile, destDir, true);
@@ -654,15 +656,13 @@ public class FIlePowerUtil {
     }
 
 
-    拷贝一个文件到指定的目录文件并且设置是否更新文件的最近修改时间copyFileToDirectory(File srcFile, File destDir, booleanpreserveFileDate)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
-    public static void copyFileToDirectory(File srcFile, File destDir, booleanpreserveFileDate) throws IOException {
+    /**
+     *  拷贝一个文件到指定的目录文件并且设置是否更新文件的最近修改时间copyFileToDirectory(File srcFile, File destDir, booleanpreserveFileDate)
+     * @param srcFile
+     * @param destDir
+     * @throws IOException
+     */
+    public static void copyFileToDirectory(File srcFile, File destDir, boolean preserveFileDate) throws IOException {
 
         if (destDir == null) {
 
@@ -683,14 +683,12 @@ public class FIlePowerUtil {
     }
 
 
-    拷贝文件到新的文件中并且保存最近修改时间copyFile(File srcFile, File destFile)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     *   拷贝文件到新的文件中并且保存最近修改时间copyFile(File srcFile, File destFile)
+     * @param srcFile
+     * @param destFile
+     * @throws IOException
+     */
     public static void copyFile(File srcFile, File destFile) throws IOException {
 
         copyFile(srcFile, destFile, true);
@@ -698,15 +696,13 @@ public class FIlePowerUtil {
     }
 
 
-    拷贝文件到新的文件中并且设置是否保存最近修改时间copyFile(File srcFile, File destFile, boolean preserveFileDate)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
-    public static void copyFile(File srcFile, File destFile, boolean preserveFileDate)throwsIOException {
+    /**
+     *  拷贝文件到新的文件中并且设置是否保存最近修改时间copyFile(File srcFile, File destFile, boolean preserveFileDate)
+     * @param srcFile
+     * @param destFile
+     * @param preserveFileDate
+     */
+    public static void copyFile(File srcFile, File destFile, boolean preserveFileDate)throws IOException {
 
         if (srcFile == null) {
 
@@ -759,15 +755,13 @@ public class FIlePowerUtil {
     }
 
 
-    拷贝文件到新的文件中并且设置是否保存最近修改时间doCopyFile(File srcFile, File destFile, boolean preserveFileDate)
-
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     * 拷贝文件到新的文件中并且设置是否保存最近修改时间doCopyFile(File srcFile, File destFile, boolean preserveFileDate)
+     * @param srcFile
+     * @param destFile
+     * @param preserveFileDate
+     * @throws IOException
+     */
     private static void doCopyFile(File srcFile, File destFile, boolean preserveFileDate) throws IOException {
 
         if (destFile.exists() && destFile.isDirectory()) {
@@ -787,9 +781,9 @@ public class FIlePowerUtil {
 
         try {
 
-            fis = newFileInputStream(srcFile);
+            fis = new FileInputStream(srcFile);
 
-            fos = newFileOutputStream(destFile);
+            fos = new FileOutputStream(destFile);
 
             input = fis.getChannel();
 
@@ -803,7 +797,7 @@ public class FIlePowerUtil {
 
             while (pos < size) {
 
-                count = (size - pos) > FIFTY_MB ? FIFTY_MB : (size - pos);
+                count = (size - pos) > 4*1024 ? 4*1024 : (size - pos);
 
                 pos += output.transferFrom(input, pos, count);
 
@@ -838,16 +832,12 @@ public class FIlePowerUtil {
 
     }
 
-    将一个目录拷贝到另一目录中，
-
-    并且保存最近更新时间copyDirectoryToDirectory(File srcDir, File destDir)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     * 将一个目录拷贝到另一目录中，并且保存最近更新时间copyDirectoryToDirectory(File srcDir, File destDir)
+     * @param srcDir
+     * @param destDir
+     * @throws IOException
+     */
     public static void copyDirectoryToDirectory(File srcDir, File destDir) throws IOException {
 
         if (srcDir == null) {
@@ -874,38 +864,30 @@ public class FIlePowerUtil {
 
         }
 
-        copyDirectory(srcDir, newFile(destDir, srcDir.getName()), true);
+        copyDirectory(srcDir, new File(destDir, srcDir.getName()), true);
 
     }
 
 
-    拷贝整个目录到新的位置，
-
-    并且保存最近修改时间copyDirectory(File srcDir, File destDir)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     *  拷贝整个目录到新的位置， 并且保存最近修改时间copyDirectory(File srcDir, File destDir)
+     * @param srcDir
+     * @param destDir
+     * @throws IOException
+     */
     public static void copyDirectory(File srcDir, File destDir) throws IOException {
 
         copyDirectory(srcDir, destDir, true);
 
     }
 
-
-    拷贝整个目录到新的位置，
-
-    并且设置是否保存最近修改时间copyDirectory(File srcDir, File destDir, boolean preserveFileDate)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     * 拷贝整个目录到新的位置， 并且设置是否保存最近修改时间copyDirectory(File srcDir, File destDir, boolean preserveFileDate)
+     * @param srcDir
+     * @param destDir
+     * @param preserveFileDate
+     * @throws IOException
+     */
     public static void copyDirectory(File srcDir, File destDir, boolean preserveFileDate) throws IOException {
 
         copyDirectory(srcDir, destDir, null, preserveFileDate);
@@ -913,16 +895,13 @@ public class FIlePowerUtil {
     }
 
 
-    拷贝过滤后的目录到指定的位置，
-
-    并且保存最近修改时间copyDirectory(File srcDir, File destDir, FileFilter filter)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     *  拷贝过滤后的目录到指定的位置，  并且保存最近修改时间copyDirectory(File srcDir, File destDir, FileFilter filter)
+     * @param srcDir
+     * @param destDir
+     * @param filter
+     * @throws IOException
+     */
     public static void copyDirectory(File srcDir, File destDir, FileFilter filter) throws IOException {
 
         copyDirectory(srcDir, destDir, filter, true);
@@ -930,17 +909,14 @@ public class FIlePowerUtil {
     }
 
 
-    拷贝过滤后的目录到指定的位置，
-
-    并且设置是否保存最近修改时间copyDirectory(File srcDir, File destDir, FileFilter filter, booleanpreserveFileDate)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
-    public static void copyDirectory(File srcDir, File destDir, FileFilter filter, booleanpreserveFileDate) throws IOException {
+    /**
+     *   拷贝过滤后的目录到指定的位置，  并且设置是否保存最近修改时间copyDirectory(File srcDir, File destDir, FileFilter filter, booleanpreserveFileDate)
+     * @param srcDir
+     * @param destDir
+     * @param filter
+     * @throws IOException
+     */
+    public static void copyDirectory(File srcDir, File destDir, FileFilter filter, boolean preserveFileDate) throws IOException {
 
         if (srcDir == null) {
 
@@ -983,7 +959,7 @@ public class FIlePowerUtil {
 
             if (srcFiles != null && srcFiles.length > 0) {
 
-                exclusionList = newArrayList < String > (srcFiles.length);
+                exclusionList = new ArrayList< String >(srcFiles.length);
 
                 for (File srcFile : srcFiles) {
 
@@ -1002,14 +978,15 @@ public class FIlePowerUtil {
     }
 
 
-    内部拷贝目录的方法doCopyDirectory(FilesrcDir, File destDir, FileFilter filter, boolean preserveFileDate, List<String> exclusionList)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     * 内部拷贝目录的方法doCopyDirectory(FilesrcDir, File destDir, FileFilter filter, boolean preserveFileDate, List<String> exclusionList)
+     * @param srcDir
+     * @param destDir
+     * @param filter
+     * @param preserveFileDate
+     * @param exclusionList
+     * @throws IOException
+     */
     private static void doCopyDirectory(File srcDir, File destDir, FileFilter filter, boolean preserveFileDate, List<String> exclusionList) throws IOException {
 
         // recurse
@@ -1048,7 +1025,7 @@ public class FIlePowerUtil {
 
         for (File file : files) {
 
-            File copiedFile = newFile(destDir, file.getName());
+            File copiedFile = new File(destDir, file.getName());
 
             if (exclusionList == null || !exclusionList.contains(file.getCanonicalPath())) {
 
@@ -1078,14 +1055,12 @@ public class FIlePowerUtil {
     }
 
 
-    根据一个Url拷贝字节到一个文件中copyURLToFile(URL source, File destination)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     * 根据一个Url拷贝字节到一个文件中copyURLToFile(URL source, File destination)
+     * @param source
+     * @param destination
+     * @throws IOException
+     */
     public static void copyURLToFile(URL source, File destination) throws IOException {
 
         InputStream input = source.openStream();
@@ -1095,17 +1070,14 @@ public class FIlePowerUtil {
     }
 
 
-    根据一个Url拷贝字节到一个文件中，
-
-    并且可以设置连接的超时时间和读取的超时时间
-    copyURLToFile(URLsource, File destination, int connectionTimeout, int readTimeout)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     * 根据一个Url拷贝字节到一个文件中，并且可以设置连接的超时时间和读取的超时时间 copyURLToFile(URLsource, File destination, int connectionTimeout, int readTimeout)
+     * @param source
+     * @param destination
+     * @param connectionTimeout
+     * @param readTimeout
+     * @throws IOException
+     */
     public static void copyURLToFile(URL source, File destination, int connectionTimeout, int readTimeout) throws IOException {
 
         URLConnection connection = source.openConnection();
@@ -1121,18 +1093,13 @@ public class FIlePowerUtil {
     }
 
 
-    拷贝一个字节流到一个文件中，如果这个文件不存在则新创建一个，
-
-    存在的话将被重写进内容copyInputStreamToFile(InputStream source, File destination)
-
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
-    public static voidcopyInputStreamToFile(InputStream source, File destination) throws IOException {
+    /**
+     * 拷贝一个字节流到一个文件中，如果这个文件不存在则新创建一个，  存在的话将被重写进内容copyInputStreamToFile(InputStream source, File destination)
+     * @param source
+     * @param destination
+     * @throws IOException
+     */
+    public static void copyInputStreamToFile(InputStream source, File destination) throws IOException {
 
         try {
 
@@ -1157,14 +1124,11 @@ public class FIlePowerUtil {
     }
 
 
-    递归的删除一个目录deleteDirectory(Filedirectory)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     * 递归的删除一个目录deleteDirectory(Filedirectory)
+     * @param directory
+     * @throws IOException
+     */
     public static void deleteDirectory(File directory) throws IOException {
 
         if (!directory.exists()) {
@@ -1193,17 +1157,11 @@ public class FIlePowerUtil {
 
     }
 
-
-    安静模式删除目录，
-
-    操作过程中会抛出异常deleteQuietly(File file)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     * 安静模式删除目录， 操作过程中会抛出异常deleteQuietly(File file)
+     * @param file
+     * @return
+     */
     public static boolean deleteQuietly(File file) {
 
         if (file == null) {
@@ -1237,15 +1195,11 @@ public class FIlePowerUtil {
 
     }
 
-
-    清除一个目录而不删除它cleanDirectory(Filedirectory)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     * 清除一个目录而不删除它cleanDirectory(Filedirectory)
+     * @param directory
+     * @throws IOException
+     */
     public static void cleanDirectory(File directory) throws IOException {
 
         if (!directory.exists()) {
@@ -1301,16 +1255,12 @@ public class FIlePowerUtil {
     }
 
 
-    等待NFS来传播一个文件的创建，
-
-    实施超时waitFor(File file, int seconds)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     *     等待NFS来传播一个文件的创建， 实施超时waitFor(File file, int seconds)
+     * @param file
+     * @param seconds
+     * @return
+     */
     public static boolean waitFor(File file, int seconds) {
 
         int timeout = 0;
@@ -1335,7 +1285,7 @@ public class FIlePowerUtil {
 
                 Thread.sleep(100);
 
-            } catch (InterruptedExceptionignore) {
+            } catch (InterruptedException ignore) {
 
                 // ignore exception
 
@@ -1351,17 +1301,13 @@ public class FIlePowerUtil {
 
     }
 
-
-    把一个文件的内容读取到一个对应编码的字符串中去readFileToString(File file, String encoding)
-
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
-    public static String readFileToString(Filefile, String encoding) throws IOException {
+    /**
+     *  把一个文件的内容读取到一个对应编码的字符串中去readFileToString(File file, String encoding)
+     * @param encoding
+     * @return
+     * @throws IOException
+     */
+    public static String readFileToString(File file, String encoding) throws IOException {
 
         InputStream in = null;
 
@@ -1380,31 +1326,24 @@ public class FIlePowerUtil {
     }
 
 
-    读取文件的内容到虚拟机的默认编码字符串readFileToString(File file)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
-    public static String readFileToString(Filefile) throws IOException {
+    /**
+     * 读取文件的内容到虚拟机的默认编码字符串readFileToString(File file)
+     * @return
+     * @throws IOException
+     */
+    public static String readFileToString(File file) throws IOException {
 
         return readFileToString(file, null);
 
     }
 
 
-    把一个文件转换成字节数组返回readFileToByteArray(File file)
-
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
-    public static byte[] readFileToByteArray(Filefile) throws IOException {
+    /**
+     * 把一个文件转换成字节数组返回readFileToByteArray(File file)
+     * @return
+     * @throws IOException
+     */
+    public static byte[] readFileToByteArray(File file) throws IOException {
 
         InputStream in = null;
 
@@ -1422,12 +1361,13 @@ public class FIlePowerUtil {
 
     }
 
-    把文件中的内容逐行的拷贝到一个对应编码的list<String> 中去
-    [java]
-    view plain
-    copy print
-    ?
-
+    /**
+     * 把文件中的内容逐行的拷贝到一个对应编码的list<String> 中去
+     * @param file
+     * @param encoding
+     * @return
+     * @throws IOException
+     */
     public static List<String> readLines(File file, String encoding) throws IOException {
 
         InputStream in = null;
@@ -1447,12 +1387,12 @@ public class FIlePowerUtil {
     }
 
 
-    把文件中的内容逐行的拷贝到一个虚拟机默认编码的list<String> 中去
-    [java]
-    view plain
-    copy print
-    ?
-
+    /**
+     *  把文件中的内容逐行的拷贝到一个虚拟机默认编码的list<String> 中去
+     * @param file
+     * @return
+     * @throws IOException
+     */
     public static List<String> readLines(File file) throws IOException {
 
         return readLines(file, null);
@@ -1460,14 +1400,13 @@ public class FIlePowerUtil {
     }
 
 
-    根据对应编码返回对应文件内容的行迭代器lineIterator(File file, String encoding)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     * 根据对应编码返回对应文件内容的行迭代器lineIterator(File file, String encoding)
+     * @param file
+     * @param encoding
+     * @return
+     * @throws IOException
+     */
     public static LineIterator lineIterator(File file, String encoding) throws IOException {
 
         InputStream in = null;
@@ -1495,29 +1434,25 @@ public class FIlePowerUtil {
     }
 
 
-    根据虚拟机默认编码返回对应文件内容的行迭代器lineIterator(File file)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
-    public static LineIterator lineIterator(Filefile) throws IOException {
+    /**
+     * 根据虚拟机默认编码返回对应文件内容的行迭代器lineIterator(File file)
+     * @return
+     * @throws IOException
+     */
+    public static LineIterator lineIterator(File file) throws IOException {
 
         return lineIterator(file, null);
 
     }
 
 
-    根据对应编码把字符串写进对应的文件中writeStringToFile(File file, String data, String encoding)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     * 根据对应编码把字符串写进对应的文件中writeStringToFile(File file, String data, String encoding)
+     * @param file
+     * @param data
+     * @param encoding
+     * @throws IOException
+     */
     public static void writeStringToFile(File file, String data, String encoding) throws IOException {
 
         OutputStream out = null;
@@ -1536,29 +1471,24 @@ public class FIlePowerUtil {
 
     }
 
-    根据虚拟机默认编码把字符串写进对应的文件中writeStringToFile(File file, String data)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
-    public static void writeStringToFile(Filefile, String data) throws IOException {
+    /**
+     *  根据虚拟机默认编码把字符串写进对应的文件中writeStringToFile(File file, String data)
+     * @param data
+     * @throws IOException
+     */
+    public static void writeStringToFile(File file, String data) throws IOException {
 
         writeStringToFile(file, data, null);
 
     }
 
 
-    根据虚拟机默认的编码把CharSequence写入到文件中(File file, CharSequence data)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     * 根据虚拟机默认的编码把CharSequence写入到文件中(File file, CharSequence data)
+     * @param file
+     * @param data
+     * @throws IOException
+     */
     public static void write(File file, CharSequence data) throws IOException {
 
         String str = data == null ? null : data.toString();
@@ -1568,14 +1498,13 @@ public class FIlePowerUtil {
     }
 
 
-    根据对应的编码把CharSequence写入到文件中write(File file, CharSequence data, String encoding)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     * 根据对应的编码把CharSequence写入到文件中write(File file, CharSequence data, String encoding)
+     * @param file
+     * @param data
+     * @param encoding
+     * @throws IOException
+     */
     public static void write(File file, CharSequence data, String encoding) throws IOException {
 
         String str = data == null ? null : data.toString();
@@ -1585,16 +1514,12 @@ public class FIlePowerUtil {
     }
 
 
-    把一个字节数组写入到指定的文件中writeByteArrayToFile(File file, byte[] data)
-
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
-    public static void writeByteArrayToFile(Filefile, byte[] data) throws IOException {
+    /**
+     * 把一个字节数组写入到指定的文件中writeByteArrayToFile(File file, byte[] data)
+     * @param data
+     * @throws IOException
+     */
+    public static void writeByteArrayToFile(File file, byte[] data) throws IOException {
 
         OutputStream out = null;
 
@@ -1612,15 +1537,13 @@ public class FIlePowerUtil {
 
     }
 
-    把集合中的内容根据对应编码逐项插入到文件中writeLines(File file, String encoding, Collection<?> lines)
-
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     * 把集合中的内容根据对应编码逐项插入到文件中writeLines(File file, String encoding, Collection<?> lines)
+     * @param file
+     * @param encoding
+     * @param lines
+     * @throws IOException
+     */
     public static void writeLines(File file, String encoding, Collection<?> lines) throws IOException {
 
         writeLines(file, encoding, lines, null);
@@ -1628,14 +1551,12 @@ public class FIlePowerUtil {
     }
 
 
-    把集合中的内容根据虚拟机默认编码逐项插入到文件中writeLines(File file, Collection<?> lines)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     * 把集合中的内容根据虚拟机默认编码逐项插入到文件中writeLines(File file, Collection<?> lines)
+     * @param file
+     * @param lines
+     * @throws IOException
+     */
     public static void writeLines(File file, Collection<?> lines) throws IOException {
 
         writeLines(file, null, lines, null);
@@ -1643,13 +1564,14 @@ public class FIlePowerUtil {
     }
 
 
-    把集合中的内容根据对应字符编码和行编码逐项插入到文件中
-
-    [java]
-    view plain
-    copy print
-    ?
-
+    /**
+     * 把集合中的内容根据对应字符编码和行编码逐项插入到文件中
+     * @param file
+     * @param encoding
+     * @param lines
+     * @param lineEnding
+     * @throws IOException
+     */
     public static void writeLines(File file, String encoding, Collection<?> lines, String lineEnding)
 
             throws IOException {
@@ -1670,30 +1592,24 @@ public class FIlePowerUtil {
 
     }
 
-    把集合中的内容根据对应行编码逐项插入到文件中
-    [java]
-    view plain
-    copy print
-    ?
-
+    /**
+     *  把集合中的内容根据对应行编码逐项插入到文件中
+     * @param file
+     * @param lines
+     * @param lineEnding
+     * @throws IOException
+     */
     public static void writeLines(File file, Collection<?> lines, String lineEnding) throws IOException {
 
         writeLines(file, null, lines, lineEnding);
 
     }
 
-
-    删除一个文件，
-
-    如果是目录则递归删除forceDelete(File file)
-
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     * 删除一个文件， 如果是目录则递归删除forceDelete(File file)
+     * @param file
+     * @throws IOException
+     */
     public static void forceDelete(File file) throws IOException {
 
         if (file.isDirectory()) {
@@ -1725,14 +1641,11 @@ public class FIlePowerUtil {
     }
 
 
-    当虚拟机退出关闭时删除文件forceDeleteOnExit(File file)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     *  当虚拟机退出关闭时删除文件forceDeleteOnExit(File file)
+     * @param file
+     * @throws IOException
+     */
     public static void forceDeleteOnExit(File file) throws IOException {
 
         if (file.isDirectory()) {
@@ -1748,14 +1661,11 @@ public class FIlePowerUtil {
     }
 
 
-    当虚拟机退出关闭时递归删除一个目录deleteDirectoryOnExit(File directory)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     * 当虚拟机退出关闭时递归删除一个目录deleteDirectoryOnExit(File directory)
+     * @param directory
+     * @throws IOException
+     */
     private static void deleteDirectoryOnExit(File directory) throws IOException {
 
         if (!directory.exists()) {
@@ -1776,13 +1686,11 @@ public class FIlePowerUtil {
     }
 
 
-    在虚拟机退出或者关闭时清除一个目录而不删除它
-    [java]
-    view plain
-    copy print
-    ?
-
-    private static void cleanDirectoryOnExit(Filedirectory) throws IOException {
+    /**
+     *  在虚拟机退出或者关闭时清除一个目录而不删除它
+     * @throws IOException
+     */
+    private static void cleanDirectoryOnExit(File directory) throws IOException {
 
         if (!directory.exists()) {
 
@@ -1837,14 +1745,11 @@ public class FIlePowerUtil {
     }
 
 
-    创建一个目录除了不存在的父目录其他所必须的都可以创建forceMkdir(File directory)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     * 创建一个目录除了不存在的父目录其他所必须的都可以创建forceMkdir(File directory)
+     * @param directory
+     * @throws IOException
+     */
     public static void forceMkdir(File directory) throws IOException {
 
         if (directory.exists()) {
@@ -1892,14 +1797,11 @@ public class FIlePowerUtil {
     }
 
 
-    获取文件或者目录的大小sizeOf(Filefile)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     * 获取文件或者目录的大小sizeOf(Filefile)
+     * @param file
+     * @return
+     */
     public static long sizeOf(File file) {
 
 
@@ -1925,14 +1827,11 @@ public class FIlePowerUtil {
     }
 
 
-    获取目录的大小sizeOfDirectory(Filedirectory)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     * 获取目录的大小sizeOfDirectory(Filedirectory)
+     * @param directory
+     * @return
+     */
     public static long sizeOfDirectory(File directory) {
 
         if (!directory.exists()) {
@@ -1975,14 +1874,12 @@ public class FIlePowerUtil {
     }
 
 
-    测试指定文件的最后修改日期是否比reference的文件新isFileNewer(File file, Filereference)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     * 测试指定文件的最后修改日期是否比reference的文件新isFileNewer(File file, Filereference)
+     * @param file
+     * @param reference
+     * @return
+     */
     public static boolean isFileNewer(File file, File reference) {
 
         if (reference == null) {
@@ -2004,19 +1901,17 @@ public class FIlePowerUtil {
     }
 
 
-    检测指定文件的最后修改时间是否在指定日期之前isFileNewer(File file, Date date)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     * 检测指定文件的最后修改时间是否在指定日期之前isFileNewer(File file, Date date)
+     * @param file
+     * @param date
+     * @return
+     */
     public static boolean isFileNewer(File file, Date date) {
 
         if (date == null) {
 
-            throw new llegalArgumentException("No specified date");
+            throw new IllegalArgumentException("No specified date");
 
         }
 
@@ -2025,16 +1920,12 @@ public class FIlePowerUtil {
     }
 
 
-    检测指定文件的最后修改时间（毫秒）
-
-    是否在指定日期之前isFileNewer(File file, long timeMillis)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     *     检测指定文件的最后修改时间（毫秒） 是否在指定日期之前isFileNewer(File file, long timeMillis)
+     * @param file
+     * @param timeMillis
+     * @return
+     */
     public static boolean isFileNewer(File file, long timeMillis) {
 
         if (file == null) {
@@ -2054,14 +1945,12 @@ public class FIlePowerUtil {
     }
 
 
-    检测指定文件的最后修改日期是否比reference文件的晚isFileOlder(File file, Filereference)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     *  检测指定文件的最后修改日期是否比reference文件的晚isFileOlder(File file, Filereference)
+     * @param file
+     * @param reference
+     * @return
+     */
     public static boolean isFileOlder(File file, File reference) {
 
         if (reference == null) {
@@ -2083,14 +1972,12 @@ public class FIlePowerUtil {
     }
 
 
-    检测指定文件的最后修改时间是否在指定日期之后isFileOlder(File file, Date date)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     *   检测指定文件的最后修改时间是否在指定日期之后isFileOlder(File file, Date date)
+     * @param file
+     * @param date
+     * @return
+     */
     public static boolean isFileOlder(File file, Date date) {
 
         if (date == null) {
@@ -2104,17 +1991,12 @@ public class FIlePowerUtil {
     }
 
 
-    检测指定文件的最后修改时间（毫秒）
-
-    是否在指定日期之后isFileOlder(File file, long timeMillis)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
-    public static boolean isFileOlder(Filefile, long timeMillis) {
+    /**
+     *     检测指定文件的最后修改时间（毫秒）  是否在指定日期之后isFileOlder(File file, long timeMillis)
+     * @param timeMillis
+     * @return
+     */
+    public static boolean isFileOlder(File file, long timeMillis) {
 
         if (file == null) {
 
@@ -2133,14 +2015,12 @@ public class FIlePowerUtil {
     }
 
 
-    计算使用CRC32校验程序文件的校验和checksumCRC32(File file)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     *  计算使用CRC32校验程序文件的校验和checksumCRC32(File file)
+     * @param file
+     * @return
+     * @throws IOException
+     */
     public static long checksumCRC32(File file) throws IOException {
 
         CRC32 crc = new CRC32();
@@ -2152,14 +2032,13 @@ public class FIlePowerUtil {
     }
 
 
-    计算一个文件使用指定的校验对象的校验checksum(Filefile, Checksum checksum)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     * 计算一个文件使用指定的校验对象的校验checksum(Filefile, Checksum checksum)
+     * @param file
+     * @param checksum
+     * @return
+     * @throws IOException
+     */
     public static Checksum checksum(File file, Checksum checksum) throws IOException {
 
         if (file.isDirectory()) {
@@ -2172,9 +2051,9 @@ public class FIlePowerUtil {
 
         try {
 
-            in = new CheckedInputStream(newFileInputStream(file), checksum);
+            in = new CheckedInputStream(new FileInputStream(file), checksum);
 
-            IOUtils.copy(in, newNullOutputStream());
+            IOUtils.copy(in, new NullOutputStream());
 
         } finally {
 
@@ -2187,14 +2066,12 @@ public class FIlePowerUtil {
     }
 
 
-    移动目录到新的目录并且删除老的目录moveDirectory(File srcDir, File destDir)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     *    移动目录到新的目录并且删除老的目录moveDirectory(File srcDir, File destDir)
+     * @param srcDir
+     * @param destDir
+     * @throws IOException
+     */
     public static void moveDirectory(File srcDir, File destDir) throws IOException {
 
         if (srcDir == null) {
@@ -2248,15 +2125,13 @@ public class FIlePowerUtil {
     }
 
 
-    把一个目录移动到另一个目录中去moveDirectoryToDirectory(File src, File destDir, booleancreateDestDir)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
-    public static void moveDirectoryToDirectory(File src, File destDir, booleancreateDestDir) throws IOException {
+    /**
+     * 把一个目录移动到另一个目录中去moveDirectoryToDirectory(File src, File destDir, booleancreateDestDir)
+     * @param src
+     * @param destDir
+     * @throws IOException
+     */
+    public static void moveDirectoryToDirectory(File src, File destDir, boolean createDestDir) throws IOException {
 
         if (src == null) {
 
@@ -2290,20 +2165,18 @@ public class FIlePowerUtil {
 
         }
 
-        moveDirectory(src, newFile(destDir, src.getName()));
+        moveDirectory(src, new File(destDir, src.getName()));
 
 
     }
 
 
-    复制文件到对应的文件中去moveFile(FilesrcFile, File destFile)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     * 复制文件到对应的文件中去moveFile(FilesrcFile, File destFile)
+     * @param srcFile
+     * @param destFile
+     * @throws IOException
+     */
     public static void moveFile(File srcFile, File destFile) throws IOException {
 
         if (srcFile == null) {
@@ -2363,18 +2236,13 @@ public class FIlePowerUtil {
     }
 
 
-    复制文件到对应的文件中去，
-
-    可设置当目标文件不存在时是否创建新的文件moveFile(File srcFile, File destFile)
-
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
-    public static void moveFileToDirectory(File srcFile, File destDir, booleancreateDestDir) throws IOException {
+    /**
+     * 复制文件到对应的文件中去， 可设置当目标文件不存在时是否创建新的文件moveFile(File srcFile, File destFile)
+     * @param srcFile
+     * @param destDir
+     * @throws IOException
+     */
+    public static void moveFileToDirectory(File srcFile, File destDir, boolean createDestDir) throws IOException {
 
         if (srcFile == null) {
 
@@ -2413,16 +2281,13 @@ public class FIlePowerUtil {
     }
 
 
-    移动文件或者目录到新的路径下，
-
-    并且设置在目标路径不存在的情况下是否创建moveToDirectory(File src, File destDir, boolean createDestDir)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     *     移动文件或者目录到新的路径下， 并且设置在目标路径不存在的情况下是否创建moveToDirectory(File src, File destDir, boolean createDestDir)
+     * @param src
+     * @param destDir
+     * @param createDestDir
+     * @throws IOException
+     */
     public static void moveToDirectory(File src, File destDir, boolean createDestDir) throws IOException {
 
         if (src == null) {
@@ -2456,16 +2321,12 @@ public class FIlePowerUtil {
     }
 
 
-    确定指定的文件是否是一个符号链接，而不是实际的文件。
-
-    isSymlink(File file)
-            [java
-
-    ]
-    view plain
-    copy print
-    ?
-
+    /**
+     *   确定指定的文件是否是一个符号链接，而不是实际的文件。 isSymlink(File file)
+     * @param file
+     * @return
+     * @throws IOException
+     */
     public static boolean isSymlink(File file) throws IOException {
 
         if (file == null) {
@@ -2490,7 +2351,7 @@ public class FIlePowerUtil {
 
             File canonicalDir = file.getParentFile().getCanonicalFile();
 
-            fileInCanonicalDir = newFile(canonicalDir, file.getName());
+            fileInCanonicalDir = new File(canonicalDir, file.getName());
 
         }
 
