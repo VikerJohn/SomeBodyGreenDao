@@ -3,13 +3,15 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="distributionType" value="LOCAL" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleHome" value="E:\Viker\AndroidTool\android-studio\gradle\gradle-2.14.1" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/animationbuttion" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/basenewdemo" />
             <option value="$PROJECT_DIR$/cardviewdemo" />
             <option value="$PROJECT_DIR$/dpicalculator" />
             <option value="$PROJECT_DIR$/emojiapp" />

@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SomeBodyGreenDao.iml" filepath="$PROJECT_DIR$/SomeBodyGreenDao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MyDefaultDemo.iml" filepath="$PROJECT_DIR$/MyDefaultDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/animationbuttion/animationbuttion.iml" filepath="$PROJECT_DIR$/animationbuttion/animationbuttion.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/basenewdemo/basenewdemo.iml" filepath="$PROJECT_DIR$/basenewdemo/basenewdemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/cardviewdemo/cardviewdemo.iml" filepath="$PROJECT_DIR$/cardviewdemo/cardviewdemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/dpicalculator/dpicalculator.iml" filepath="$PROJECT_DIR$/dpicalculator/dpicalculator.iml" />
       <module fileurl="file://$PROJECT_DIR$/emojiapp/emojiapp.iml" filepath="$PROJECT_DIR$/emojiapp/emojiapp.iml" />

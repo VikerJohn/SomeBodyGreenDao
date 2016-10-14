@@ -1,6 +1,7 @@
 package com.example.dsw.cardviewdemo;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -51,6 +52,12 @@ public class MainActivity extends Activity {
 
         linearLayout.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,50));
     }
+
+    public void onBtn(View view){
+
+        startActivity(new Intent(MainActivity.this,AuthActivity.class));
+    }
+
 
     class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
         private List<ImageInfor> list;

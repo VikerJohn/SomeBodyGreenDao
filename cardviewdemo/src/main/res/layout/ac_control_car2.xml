@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ac_control_car"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/control_bg"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40px">
+
+            <TextView
+                android:id="@+id/tvCarNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="5dip"
+                android:layout_marginRight="5dip"
+                android:text=" No:ABC5465"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/txt_gray" />
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="@dimen/dp50"
+                android:layout_height="1dip"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/tvCarNo"
+                android:background="@color/txt_gray" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="@dimen/dp50"
+                android:layout_height="1dip"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/tvCarNo"
+                android:background="@color/txt_gray" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="509px"
+            android:layout_height="700px"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40px"
+            android:background="@drawable/bg_control">
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_marginTop="70px"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="70px"
+                    android:layout_height="60px"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/shijian" />
+
+                <TextView
+                    android:layout_marginTop="30px"
+                    android:text="1231231231"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_marginTop="70px"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="70px"
+                    android:layout_height="60px"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/shijian" />
+
+                <TextView
+                    android:layout_marginTop="30px"
+                    android:text="1231231231"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_marginTop="-360px"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

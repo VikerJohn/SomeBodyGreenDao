@@ -68,11 +68,18 @@ public class ItemFragment extends BaseFragment implements BaseRVAdpater.OnItemCl
     }
 
     private void loadData() {
-        ApiService.getArts(new ApiService.CallbackData<List<Article.DataBean.ContentBean>>() {
+      /*  ApiService.getArts(new ApiService.CallbackData<List<Article.DataBean.ContentBean>>() {
             @Override
             public void done(List<Article.DataBean.ContentBean> data) {
                 itemAdapater.setDate(data);
                 itemAdapater.notifyDataSetChanged();
+            }
+        });*/
+
+        ApiService.getArts("",new ApiService.CallbackData<List<Article.DataBean.ContentBean>>() {
+            @Override
+            public void done(List<Article.DataBean.ContentBean> data) {
+
             }
         });
 

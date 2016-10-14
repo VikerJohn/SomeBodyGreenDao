@@ -1,0 +1,234 @@
+<resources>
+    <string name="app_name">测试项目</string>
+    <string name="app_back">返回</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="splash_1">DINGDONG</string>
+    <string name="splash_2">叮咚出行 随心而行</string>
+
+    <string name="submit">提交</string>
+    <string name="cancle">取消</string>
+    <string name="map">地图</string>
+    <string name="controlCart">控制车辆</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="msg_tip">敬请期待</string>
+
+    <string name="main_hour">分时租</string>
+    <string name="main_day">日租</string>
+    <string name="main_appoint">预约</string>
+
+    <string name="getCarPlace">   取车点：</string>
+    <string name="returnCarPlace">   还车点：</string>
+
+    <string name="rentSuggestPlace">   [推荐] 有龙集团总部停车场</string>
+    <string name="rentTwoSeet">便捷2座</string>
+    <string name="rentFourSeet">家庭4座</string>
+    <string name="rentLuxury">豪华轿车</string>
+
+    <string name="rentCartmsg" formatted="false">全程%d公里，大约花费%d分钟</string>
+    <string name="rentCartCalculate" formatted="false">预估价：￥%d</string>
+    <string name="rentCartDialog">确定后我们将为你生成订单，订单可在10分钟内无偿取消，否则将产生额外费用！</string>
+    <string name="rentControlCart">控制车辆</string>
+
+    <string name="rentControlTips">下单成功！若控制失败，可输入发给您的密码即可启动车辆！如未收到密码，请联系客服 400-888-8888</string>
+
+
+    <string name="searchToGo" formatted="false">你要去哪儿</string>
+
+    <string name="btnSelectCar">选车</string>
+    <string name="btnRentCar">租车</string>
+
+    <string name="select_curPlace">您在：%s</string>
+    <string name="select_SuggestPlace_re">根据您的所在位置推荐以下取车点</string>
+    <string name="select_home_nearby">家附近的停车场</string>
+    <string name="select_company_nearby">公司附近的停车场</string>
+    <string name="select_catCount"> 辆车可用</string>
+
+
+    <string name="nav_trip">行程</string>
+    <string name="nav_wallet">钱包</string>
+    <string name="nav_service">  客服</string>
+    <string name="nav_setting">设置</string>
+
+    <string name="msg_title">消息</string>
+    <string name="msg_nothing_tips">你还没有新的消息哦~</string>
+
+    <string name="cancle_msg">行程已取消\n请告诉我们原因</string>
+    <string name="cancle_msg2">我们会努力为您提供更好地服务</string>
+
+
+    <string name="cancle_reason1">行程有变，暂时不需要用车</string>
+    <string name="cancle_reason2">取车点太远</string>
+    <string name="cancle_reason3">价格不合理</string>
+    <string name="cancle_reason4">找不到还车点</string>
+    <string name="cancle_reason5">车内环境太脏</string>
+    <string name="cancle_reason6">其他</string>
+
+    <string name="evaluate_msg">你的评价，让我们更完美</string>
+    <string name="evaluate_title">评价</string>
+    <string name="evaluate_more">更多</string>
+
+    <string name="evaluateDetail">查看明细</string>
+    <string name="evaluatePriceDoubt">费用异议</string>
+    <string name="evaluatebtnDepositRe">押金审退</string>
+    <string name="evaluateComit">提交评论</string>
+    <string name="evaluateShareJuanTxt">分享领卷</string>
+    <string name="evaluateSelectTagTxt">请选择标签</string>
+    <string name="evaluateHint">其他意见和建议（您的意见是我们前进的动力）</string>
+
+
+    <string name="priceRole_1">0元起步价</string>
+    <string name="priceRole_2">2元/公里</string>
+    <string name="priceRole_3">0.55元/1分钟</string>
+    <string name="priceRole_4">8元最低消费</string>
+    <string name="priceRoleTitle">计费规则</string>
+    <string name="priceRoleMoreDetail">详细说明</string>
+    <string name="priceRoleDetailTitle">计费规则详情</string>
+
+    <string name="priceDetailTitle">费用详情</string>
+    <string name="priceDetail_budget">合计预算</string>
+    <string name="priceDetail_liChengPrice">里程费用(0.36公里)</string>
+    <string name="priceDetail_lcPriceDefault">0.7元</string>
+    <string name="priceDetail_shichangPrice">时长费（1分钟）</string>
+    <string name="priceDetail_scPriceDefault">0.5元</string>
+    <string name="priceDetail_minPrice">最低消费</string>
+    <string name="priceDetail_minPriceDefault">8元</string>
+    <string name="priceDetail_msg">里程费、时长费合计不足最低消费时，直接按最低消费额计费。</string>
+    <string name="priceDetail_more">计费规则详情</string>
+
+    .
+
+    <string name="personalTilte">个人信息</string>
+    <string name="personalHead">头像</string>
+    <string name="personalNickName">昵称</string>
+    <string name="personalSex">性别</string>
+    <string name="personalAge">年龄</string>
+    <string name="personalPhone">手机号</string>
+    <string name="personalSign">我的签名</string>
+    <string name="personalRang">等级</string>
+    <string name="personalVocation">行业</string>
+    <string name="personalCompany">公司-职业</string>
+    <string name="personalAuthentication">车主认证</string>
+    <string name="personalHintTip">请填写</string>
+    <string name="personalHintSelect">请选择</string>
+
+    <string name="travel_tip">已完成订单</string>
+    <string name="travel_title">我的行程</string>
+    <string name="travel_stateFinish">已完成</string>
+    <string name="travel_stateActivite">未完成</string>
+    <string name="travel_getCarPoint">取车点：%s</string>
+    <string name="travel_reCarPoint">还车车点：%s</string>
+
+    <string name="wallet_title">我的钱包</string>
+    <string name="wallet_piao">发票</string>
+    <string name="wallet_dou">豆豆</string>
+    <string name="wallet_juan">优惠卷</string>
+    <string name="wallet_account">余额</string>
+
+    <string name="serviceCenter_title">客服中心</string>
+    <string name="serviceCenter_msg">你是否遇到以下问题</string>
+    <string name="serviceCenter_question1">某一笔订单遇到问题</string>
+    <string name="serviceCenter_question2">订单无法支付</string>
+    <string name="serviceCenter_question3">重复支付车费</string>
+    <string name="serviceCenter_question4">投诉/咨询进度查询</string>
+    <string name="serviceCenter_question5">联系客服</string>
+    <string name="serviceCenter_more">点击查看更多</string>
+    <string name="serviceHelp_Msg1">叮咚用户遇到人身危险时\n的专属通道，请谨慎使用</string>
+    <string name="serviceHelp_Msg2">叮咚用户将采取录音以为您保留证据\n获取您的位置来提供必要的帮助</string>
+    <string name="serviceHelp_Try">试用一下</string>
+    <string name="serviceHelp_btn">紧急求助</string>
+
+    <string name="settingCenter_title">设置</string>
+    <string name="settingCenter_accout">账号与安全</string>
+    <string name="settingCenter_commonAddress">常用地址</string>
+    <string name="settingCenter_soundSwitch">音效开关</string>
+    <string name="settingCenter_emergencyContact">紧急联系人</string>
+    <string name="settingCenter_travelSafety">行程安全</string>
+    <string name="settingCenter_guide">用户指南</string>
+    <string name="settingCenter_version">版本更新</string>
+    <string name="settingCenter_company">公司-职业</string>
+    <string name="settingCenter_signOut">退出登录</string>
+
+    <string name="licenseInfo_title">驾照信息</string>
+    <string name="licenseInfo_realName">请输入真实姓名</string>
+    <string name="licenseInfo_licenseNo">请输入驾驶证号码</string>
+    <string name="licenseInfo_msgPhoto">上传证件图片</string>
+    <string name="licenseInfo_msgLiscense">填写您的【驾驶证】信息</string>
+    <string name="licenseInfo_msgLiscense2">(认证后可获得叮咚出行官方驾驶权认证)</string>
+    <string name="licenseInfo_msg">为保障出行安全，请务必填写本人的驾驶证资料\n驾驶证号同时作为实名信息进行验证</string>
+    <string name="licenseInfo_submit">确认提交</string>
+
+    <string name="control_dot">网点查询</string>
+    <string name="control_find">寻车</string>
+    <string name="control_key">钥匙</string>
+    <string name="control_reCar">还车</string>
+    <string name="control_help">帮助</string>
+    <string name="control_lock">锁车</string>
+    <string name="control_reCarTipTitle">还车前，您必须</string>
+    <string name="control_reCarTip1">将车切断并下车</string>
+    <string name="control_reCarTitle">确定还车？</string>
+    <string name="control_reCarContent">确定结束本次行程吗？</string>
+
+    <!--<string name="control_reCarTip2">件车切断并下车</string>-->
+    <!--<string name="control_reCarTip3">锁上车门</string> -->
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="error_key">key验证无效！</string>
+    <string name="error_other">未知错误，请稍后重试!错误码为</string>
+    <string name="no_result">对不起，没有搜索到相关数据！</string>
+
+
+    <string name="pay_title">支付车费</string>
+    <string name="pay">结算支付</string>
+    <string name="pay_sumPrice">车费合计</string>
+    <string name="pay_discountPrice">优惠合计</string>
+    <string name="pay_discountJuan">优惠抵扣卷</string>
+    <string name="pay_choice">选择</string>
+    <string name="pay_wechat">微信支付</string>
+    <string name="pay_account">余额支付</string>
+    <string name="pay_moreInfo">跟多详情</string>
+    <string name="pay_details">车费详情</string>
+    <string name="pay_success">支付成功</string>
+    <string name="pay_type">支付方式</string>
+    <string name="pay_comit">确认支付%d元</string>
+
+
+    <string name="complaintTitle">投诉</string>
+    <string name="complaintR1">对车内卫生不满意</string>
+    <string name="complaintR2">我的费用有问题</string>
+    <string name="complaintR3">对线路规划不满意</string>
+    <string name="complaintROthor">其他</string>
+    <string name="complaintComit">匿名提交</string>
+
+    <string name="complaintResult">投诉结果：客服已收到</string>
+    <string name="complaintResultTip">将尽快安排出来，给您带来不便，深表歉意</string>
+    <string name="complaintReason">投诉理由：不是订单显示车辆</string>
+    <string name="complaintShouye">返回首页</string>
+    <string name="complaintLink">客服电话</string>
+
+
+    <string name="netPoint_get">取车网点</string>
+    <string name="netPoint_retrun">还车网点</string>
+
+
+    <string name="loginTitle">登录</string>
+    <string name="loginHintPhone">请输入手机号码</string>
+    <string name="loginHintCode">短信验证码</string>
+    <string name="loginHintGetCode">获取验证码</string>
+    <string name="loginHintAgreementAgree">我已阅读，并同意</string>
+    <string name="loginAgreementBtn">《用户注册协议》</string>
+    <string name="loginAgreement">《用户注册协议》《用户注册协议》《用户注册协议》《用户注册协议》</string>
+    <string name="loginBtn">登录</string>
+    <string name="loginAuthor">第三方登录</string>
+
+
+</resources>

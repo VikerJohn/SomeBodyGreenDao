@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="VerticalStepView">
+        <attr name="labelTextSize" format="dimension" />
+        <attr name="subLabelTextSize" format="dimension" />
+        <attr name="labelTextColor" format="color" />
+        <attr name="subLabelTextColor" format="color" />
+        <attr name="normalColor" format="color" />
+        <attr name="progressColor" format="color" />
+        <attr name="circleRadius" format="dimension" />
+        <attr name="lineThickness" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="IndexViewPager">
+        <attr name="isCanScroll" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="RadianLineView">
+        <attr name="zIsFill" format="boolean" />
+        <attr name="zRvColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="ArcProgressbar">
+        <attr name="bgStrokeWidth" format="dimension" />
+        <attr name="barStrokeWidth" format="dimension" />
+        <attr name="bgColor" format="color" />
+        <attr name="barColor" format="color" />
+        <attr name="smallBgColor" format="color" />
+        <attr name="progress_" format="integer" />
+        <attr name="progressMax" format="integer" />
+
+    </declare-styleable>
+
+
+
+    <declare-styleable name="RadarView">
+        <attr name="image_width" format="dimension"></attr>
+        <attr name="circle_margin" format="dimension"></attr>
+        <attr name="circle_width" format="dimension"></attr>
+        <attr name="circle_color" format="color"></attr>
+        <attr name="circle_colorx" format="color"></attr>
+        <attr name="circle_colorxx" format="color"></attr>
+        <attr name="circle_colorxxx" format="color"></attr>
+        <attr name="saner_color" format="color"></attr>
+        <attr name="default_image" format="reference"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="RippleLayout">
+        <attr name="color" format="color" />
+        <attr name="strokeWidth" format="dimension" />
+        <attr name="radius" format="dimension" />
+        <attr name="duration" format="integer" />
+        <attr name="rippleNums" format="integer" />
+        <attr name="scale" format="float" />
+    </declare-styleable>
+</resources>
